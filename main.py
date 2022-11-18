@@ -14,11 +14,11 @@ with open("key.txt","r") as key:
 async def on_ready():
     print('Logged in as')
     print(bot.user)
-    print(both.user.id)
+    print(bot.user.id)
     print('------')
 
-@bot.slash_command(name="hello",description="Coucou")
-async def hello(ctx):
-    await ctx.respond("Hello!")
+@bot.slash_command(name="ping",description="Say pong")
+async def Ping(ctx):
+    await ctx.respond("pong")
 
 bot.run(TOKEN)
