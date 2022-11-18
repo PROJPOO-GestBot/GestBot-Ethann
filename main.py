@@ -1,25 +1,24 @@
 #!/usr/local/bin/python3
 import discord
+from libs.db import DbConnector
 
-intents = discord.Intents.default()
-intents.message_content = True
+bot = discord.Bot()
 
-client = discord.Client(intents=intents)
+db = DbConnector()
 
 TOKEN = None
 with open("key.txt","r") as key:
     TOKEN = key.readline()
 
-@client.event
+@bot.event
 async def on_ready():
-    print(f'We have logged in as {client.user}')
+    print('Logged in as')
+    print(bot.user)
+    print(both.user.id)
+    print('------')
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+@bot.slash_command(name="hello",description="Coucou")
+async def hello(ctx):
+    await ctx.respond("Hello!")
 
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
-
-client.run(TOKEN)
+bot.run(TOKEN)

@@ -1,9 +1,9 @@
 #!/usr/local/bin/python3
-import mysql
+import mysql.connector, csv
 
 class DbConnector:
-    def __init__(self):
-        with open('credentials', 'r') as csvfile:
+    def __init__(self, crendentialsFile='dbCredentials'):
+        with open(crendentialsFile, 'r') as csvfile:
             spamreader = csv.reader(csvfile, delimiter=',')
             for row in spamreader:
                 self.database = mysql.connector.connect(
@@ -13,18 +13,17 @@ class DbConnector:
                   password=row[3],
                   database=row[4]
                 )
-    @property
-    def Select(self,query):
+
+    def Select(self,query:str):
         Cursor = self.database.cursor()
 
         Cursor.execute(query)
 
         return Cursor.fetchall()
 
-    @Insert.setter
-    def Insert(self, v):
+    def Insert(self, query:str):
         Cursor = self.database.cursor()
 
-        Cursor.execute(v)
+        Cursor.execute(query)
 
         database.commit()
