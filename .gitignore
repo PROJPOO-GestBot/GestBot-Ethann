@@ -1,2 +1,4 @@
 key.txt
 dbCredentials
+__pycache__
+libs/__pycache__
