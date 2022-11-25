@@ -6,12 +6,7 @@ import numpy as np
 import os
 
 class profil:
-    def __init__(self):
-
-
-
-
-    def createProfil(filePath, userName, userProfilPath, level, point, display_name, coords,badge=[], background="default", textColor="#0000FF", barColor="#ADFF2F"):
+    def __init__(self, profilPath, userName, userProfilPicture, level, xp, display_name, coords,badge=[], background="default", textColor="#0000FF", barColor="#ADFF2F"):
         img = Image.open(background).convert('RGBA').resize((500,281))
 
         _textColor = ImageColor.getcolor(str(textColor), "RGBA")
@@ -50,15 +45,19 @@ class profil:
 
         # badge
 
-        progress = (point * 100 / (level * 200))/100
+        progress = (xp * 100 / (level * 200))/100
 
         bar = new_bar(1, 1, 500, 25, progress, fg=_barColor)
 
         img.paste(bar, (coords['levelBar']['x'], coords['levelBar']['y']), bar)
 
-        img.save(filePath)
+        img.save(profilPath)
 
-        return filePath
+        self._profilPath = profilPath
+
+    def profilPath(self):
+        return self.profilPath
+
 
     # Private Methods
     def __crop_center(pil_img, crop_width, crop_height):
