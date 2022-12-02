@@ -5,21 +5,21 @@ from io import BytesIO
 import numpy as np
 import os
 
-class profil:
-    def __init__(self, profilPath, userName, userProfilPicture, level, xp, display_name, coords,badge=[], background="default", textColor="#0000FF", barColor="#ADFF2F"):
+class ProfilImage():
+    def __init__(self, profilPath:str, userName:str, userProfilPicture:str, level:int, xp:int, display_name:str, coords:dict,badge:dict=[], background:str="img/background/default", textColor:str="#0000FF", barColor:str="#ADFF2F"):
         img = Image.open(background).convert('RGBA').resize((500,281))
 
         _textColor = ImageColor.getcolor(str(textColor), "RGBA")
         _barColor = ImageColor.getcolor(str(barColor), "RGBA")
 
         # image
-        response = requests.get(userProfilPath)
+        response = requests.get(userProfilPicture)
         pic = Image.open(BytesIO(response.content)).convert('RGBA').resize((128,128))
 
         h,w = pic.size
 
-        pic = crop_max_square(pic).resize((w, h), Image.LANCZOS)
-        pic = mask_circle_transparent(pic, 1)
+        pic = self.__crop_max_square(pic).resize((w, h), Image.LANCZOS)
+        pic = self.__mask_circle_transparent(pic, 1)
 
         img.paste(pic, (coords["profilPicture"]['x'], coords["profilPicture"]['y']), pic)
 
@@ -47,30 +47,30 @@ class profil:
 
         progress = (xp * 100 / (level * 200))/100
 
-        bar = new_bar(1, 1, 500, 25, progress, fg=_barColor)
+        bar = self.__new_bar(1, 1, 500, 25, progress, fg=_barColor)
 
         img.paste(bar, (coords['levelBar']['x'], coords['levelBar']['y']), bar)
 
         img.save(profilPath)
 
-        self._profilPath = profilPath
+        self.__profilPath = profilPath
 
-    def profilPath(self):
-        return self.profilPath
+    def ProfilPath(self):
+        return self.__profilPath
 
 
     # Private Methods
-    def __crop_center(pil_img, crop_width, crop_height):
+    def __crop_center(self,pil_img, crop_width, crop_height):
         img_width, img_height = pil_img.size
         return pil_img.crop(((img_width - crop_width) // 2,
                              (img_height - crop_height) // 2,
                              (img_width + crop_width) // 2,
                              (img_height + crop_height) // 2))
 
-    def __crop_max_square(pil_img):
-        return crop_center(pil_img, min(pil_img.size), min(pil_img.size))
+    def __crop_max_square(self, pil_img):
+        return self.__crop_center(pil_img, min(pil_img.size), min(pil_img.size))
 
-    def __mask_circle_transparent(pil_img, blur_radius, offset=0):
+    def __mask_circle_transparent(self,pil_img, blur_radius, offset=0):
         offset = blur_radius * 2 + offset
         mask = Image.new("L", pil_img.size, 0)
         draw = ImageDraw.Draw(mask)
@@ -82,7 +82,7 @@ class profil:
 
         return result
 
-    def __new_bar(x, y, width, height, progress, bg=(0, 0, 0, 0), fg=(173,255,47,255), fg2=(15,15,15,0)):
+    def __new_bar(self, x, y, width, height, progress, bg=(0, 0, 0, 0), fg=(173,255,47,255), fg2=(15,15,15,0)):
         bar = Image.new(mode="RGBA", size=(width+(x*2)*2, height+(y*2)*2))
         draw = ImageDraw.Draw(bar)
         # Draw the background

@@ -2,3 +2,5 @@ mysql-connector-python
 py-cord
 pillow
 python-dotenv
+requests
+numpy
