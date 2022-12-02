@@ -5,7 +5,7 @@ class Ping(discord.Cog):
         self._bot = bot
 
     @discord.slash_command()
-    async def ping(self, ctx, *, search: str):
+    async def ping(self, ctx):
         await ctx.respond("pong")
 
 def setup(bot):

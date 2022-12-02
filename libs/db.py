@@ -1,29 +1,43 @@
 #!/usr/local/bin/python3
-import mysql.connector, csv
+import mysql.connector
 
-class DbConnector:
-    def __init__(self, crendentialsFile='dbCredentials'):
-        with open(crendentialsFile, 'r') as csvfile:
-            spamreader = csv.reader(csvfile, delimiter=',')
-            for row in spamreader:
-                self.database = mysql.connector.connect(
-                  host=row[0],
-                  port=row[1],
-                  user=row[2],
-                  password=row[3],
-                  database=row[4]
-                )
+class Database():
+    __db : mysql.connector.MySQLConnection
 
-    def Select(self,query:str):
-        Cursor = self.database.cursor()
+    def __init__(self, user:str, password:str,dbName:str ,host:str="localhost", port:str="3306"):
+        self.__db =  mysql.connector.connect(
+            host = host,
+            port = port,
+            user = user,
+            password = password,
+            database=dbName
+        )
 
-        Cursor.execute(query)
+    def Select(self, query:str) -> dict:
+        """This method is designed to execute a SQL SELECT query.
 
-        return Cursor.fetchall()
+        Args:
+            query (str): The SQL query
 
-    def Insert(self, query:str):
-        Cursor = self.database.cursor()
+        Returns:
+            dict: A dict with the informations who were fetch on the database.
+        """
 
-        Cursor.execute(query)
+        cursor = self.__db.cursor()
+        cursor.execute(query)
 
-        database.commit()
+        result = cursor.fetchall()
+
+        return result
+
+    def Modify(self, query:str) -> None:
+        """This method is designed to execute a SQL query (Insert or Update).
+
+        Args:
+            query (str): The SQL query
+        """
+
+        cursor = self.__db.cursor()
+        cursor.execute(query)
+
+        self.__db.commit()
