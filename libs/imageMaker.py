@@ -6,7 +6,16 @@ import numpy as np
 import os
 
 class ProfilImage():
-    def __init__(self, profilPath:str, userName:str, userProfilPicture:str, level:int, xp:int, display_name:str, coords:dict,badge:dict=[], background:str="img/background/default", textColor:str="#0000FF", barColor:str="#ADFF2F"):
+    __coords = {
+        'profilPicture':{'x': 186,'y': 35},
+        'name':{'x': 186,'y': 155},
+        'userName':{'x': 190,'y': 195},
+        'level':{'x': 250,'y': 224},
+        'badge':{'x': 150,'y': 5},
+        'levelBar':{'x': 0,'y': 254}
+    }
+    
+    def __init__(self, profilPath:str, userName:str, userProfilPicture:str, level:int, xp:int, display_name:str, coords:dict=__coords,badge:dict=[], background:str="", textColor:str="#0000FF", barColor:str="#ADFF2F"):
         img = Image.open(background).convert('RGBA').resize((500,281))
 
         _textColor = ImageColor.getcolor(str(textColor), "RGBA")

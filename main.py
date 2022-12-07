@@ -9,7 +9,15 @@ load_dotenv()
 
 bot = discord.Bot()
 
-db = Database(os.getenv("sqlUser"), os.getenv("sqlPassword"), os.getenv("sqlDBName"), host=os.getenv("sqlHost"), port=os.getenv("sqlPort"))
+"""
+db = Database(
+    os.getenv("sqlUser"),
+    os.getenv("sqlPassword"),
+    os.getenv("sqlDBName"),
+    host=os.getenv("sqlHost"),
+    port=os.getenv("sqlPort")
+)
+"""
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
@@ -17,7 +25,6 @@ for filename in os.listdir('./cogs'):
 
 @bot.event
 async def on_ready():
-
     print('Logged in as')
     print(bot.user)
     print(bot.user.id)
