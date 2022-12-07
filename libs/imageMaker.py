@@ -14,7 +14,7 @@ class ProfilImage():
         'badge':{'x': 150,'y': 5},
         'levelBar':{'x': 0,'y': 254}
     }
-    
+
     def __init__(self, profilPath:str, userName:str, userProfilPicture:str, level:int, xp:int, display_name:str, coords:dict=__coords,badge:dict=[], background:str="", textColor:str="#0000FF", barColor:str="#ADFF2F"):
         img = Image.open(background).convert('RGBA').resize((500,281))
 

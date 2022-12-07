@@ -1,4 +1,4 @@
-import discord
+import discord, os
 from libs.imageMaker import ProfilImage
 
 class profil(discord.Cog):
@@ -9,16 +9,26 @@ class profil(discord.Cog):
     async def profil(self, ctx):
         await ctx.defer()
 
+        imgProfil = "img/profil/"
+        imgBackground = "img/background/"
+
+        self.__makeDirs(imgProfil)
+        self.__makeDirs(imgBackground)
+
         pro = ProfilImage(
-            "img/profil/386200134628671492.png",
+            imgProfil+"386200134628671492.png",
             "Ethann8#7747",
             "https://cdn.discordapp.com/avatars/386200134628671492/a_de9e9a4c0e60276e7252e9b75c821b49.png",
             5,
-            12,
+            420,
             "Ethann",
-            background="img/background/default"
+            background=imgBackground+"default"
         )
         await ctx.respond(file=discord.File(pro.ProfilPath()))
+
+    def __makeDirs(self,dirs):
+        if not os.path.exists(dirs):
+            os.makedirs(dirs)
 
 def setup(bot):
     bot.add_cog(profil(bot))
