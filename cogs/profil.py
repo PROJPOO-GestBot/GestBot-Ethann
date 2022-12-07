@@ -7,7 +7,7 @@ class profil(discord.Cog):
 
     @discord.slash_command(name="profil", description="Return your profil on server")
     async def profil(self, ctx):
-
+        await ctx.defer()
         coords = {
             'profilPicture':{'x': 186,'y': 35},
             'name':{'x': 186,'y': 155},
