@@ -1,5 +1,5 @@
 import discord, os
-from libs.imageMaker import ProfilImage
+from lib.imageMaker import ProfilImage
 
 class profil(discord.Cog):
     def __init__(self, bot) -> None:
