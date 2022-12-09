@@ -1,14 +1,11 @@
 #!/usr/local/bin/python3
 import discord
-from libs.db import Database
+from lib.db import Database
 import os,csv
 from dotenv import load_dotenv
 
 load_dotenv()
-
-
 bot = discord.Bot()
-
 
 """
 db = Database(
@@ -19,7 +16,6 @@ db = Database(
     port=os.getenv("SQL_PORT")
 )
 """
-
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
