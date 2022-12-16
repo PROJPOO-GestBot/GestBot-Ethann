@@ -13,8 +13,8 @@ class Profile(discord.Cog):
         await ctx.defer()
 
         # TODO this folder doesn't exist
-        img_profile = "img/profile/"
-        img_background = "img/background/"
+        img_profile = "data/img/profile/"
+        img_background = "data/img/background/"
 
         self.__make_dirs(img_profile)
         self.__make_dirs(img_background)

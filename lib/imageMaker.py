@@ -36,12 +36,12 @@ class ProfilImage():
         d = ImageDraw.Draw(img)
 
         #name
-        d.multiline_text((coords["name"]['x'], coords["name"]['y']), display_name, font=ImageFont.truetype("font/ancientMedium.ttf", 45), fill=_textColor)
+        d.multiline_text((coords["name"]['x'], coords["name"]['y']), display_name, font=ImageFont.truetype("data/font/ancientMedium.ttf", 45), fill=_textColor)
 
-        d.multiline_text((coords["userName"]['x'], coords["userName"]['y']), userName, font=ImageFont.truetype("font/LiberationSans-Regular.ttf", 20), fill=_textColor)
+        d.multiline_text((coords["userName"]['x'], coords["userName"]['y']), userName, font=ImageFont.truetype("data/font/LiberationSans-Regular.ttf", 20), fill=_textColor)
 
         #level
-        d.multiline_text((coords["level"]['x'], coords["level"]['y']), str(level), font=ImageFont.truetype("font/LiberationSans-Regular.ttf", 30), fill=_barColor)
+        d.multiline_text((coords["level"]['x'], coords["level"]['y']), str(level), font=ImageFont.truetype("data/font/LiberationSans-Regular.ttf", 30), fill=_barColor)
 
         # badge
 

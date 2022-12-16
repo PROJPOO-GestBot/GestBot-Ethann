@@ -23,6 +23,22 @@ SQL_DB_NAME = "GestBot"
 BOT_TOKEN = ""
 ```
 
+## Folder Structure
+
+```
+    GestBot
+    |
+    ├── cogs                    # Cogs files for commands
+    ├── doc                     # Documentation files (alternatively `docs`)
+    ├── lib                     # Library files for class
+    ├── test                    # Automated tests (alternatively `spec` or `tests`)
+    ├── data                    # Data file like img or font, ect...
+    ├── main.py                 # Bot base file
+    ├── requirements.txt
+    ├── LICENSE
+    └── README.md
+```
+
 ## Test
 
 
