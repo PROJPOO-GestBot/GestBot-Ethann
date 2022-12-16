@@ -1,8 +1,9 @@
-import unittest, os
+import unittest, os, sys
+sys.path.insert(0,'..')
 import GestBot.lib.imageMaker as ImageMaker
 
-class TestImageMaker(unittest.TestCase):
-    def filehere(self):
+class Test_Image_Maker(unittest.TestCase):
+    def Test_File_here(self):
         imgBackground = "img/background/"
 
         self.assertFalse(os.path.isfile(profilImage.ProfilPath))
