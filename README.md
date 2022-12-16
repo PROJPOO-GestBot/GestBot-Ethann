@@ -11,7 +11,7 @@ https://docs.pycord.dev/en/stable/discord.html
 ## Install
 
 ``` Bash
-python -m pip install -r requirement.txt
+python -m pip install -r requirements.txt
 ```
 make a **.env** file with
 ``` Env
