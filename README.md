@@ -1,5 +1,13 @@
 # GestBot
 
+## Prerequisite
+
+Python version : *3.10.9*
+
+You will need a bot and is token 
+You can follow this documentation to do it 
+https://docs.pycord.dev/en/stable/discord.html
+
 ## Install
 
 ``` Bash

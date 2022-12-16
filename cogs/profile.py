@@ -16,8 +16,8 @@ class Profile(discord.Cog):
         img_profile = "img/profile/"
         img_background = "img/background/"
 
-        self.__makeDirs(img_profile)
-        self.__makeDirs(img_background)
+        self.__make_dirs(img_profile)
+        self.__make_dirs(img_background)
 
         #TODO Review Remove data from you code. You must using parameters to pass this kind of information.
         pro = ProfilImage(
@@ -37,4 +37,4 @@ class Profile(discord.Cog):
 
 
 def setup(bot):
-    bot.add_cog(profile(bot))
+    bot.add_cog(Profile(bot))
