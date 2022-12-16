@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 import discord
 from lib.db import Database
-import os,csv
+import os,csv, datetime
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -27,5 +27,9 @@ async def on_ready():
     print(bot.user)
     print(bot.user.id)
     print('------')
+
+@bot.event
+async def on_message(message):
+    print("(in "+str(message.channel)+" at "+str(datetime.datetime.now())+")"+str(message.author)+": "+message.content)
 
 bot.run(os.getenv("BOT_TOKEN"))
