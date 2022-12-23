@@ -16,10 +16,10 @@ class Profile(discord.Cog):
         img_profile = "data/img/profile/"
         img_background = "data/img/background/"
 
-        self.__make_dirs(img_profile)
-        self.__make_dirs(img_background)
+        self.__make_dir(img_profile)
+        self.__make_dir(img_background)
 
-        #TODO Review Remove data from you code. You must using parameters to pass this kind of information.
+        # TODO Review Remove data from you code. You must using parameters to pass this kind of information.
         pro = ProfilImage(
             img_profile + "386200134628671492.png",
             "Ethann8#7747",
@@ -31,9 +31,9 @@ class Profile(discord.Cog):
         )
         await ctx.respond(file=discord.File(pro.ProfilPath()))
 
-    def __make_dirs(self, dirs):
-        if not os.path.exists(dirs):
-            os.makedirs(dirs)
+    def __make_dir(self, dir):
+        if not os.path.exists(dir):
+            os.mkdir(dir)
 
 
 def setup(bot):
