@@ -3,10 +3,10 @@ sys.path.insert(0,'..')
 import GestBot.lib.imageMaker as ImageMaker
 
 class Test_Image_Maker(unittest.TestCase):
-    def Test_File_here(self):
+    def test_is_there_a_file(self):
         imgBackground = "img/background/"
 
-        self.assertFalse(os.path.isfile(profilImage.ProfilPath))
+        self.assertFalse(os.path.isfile("img/profil/unitTest.png"))
 
         profilImage = ImageMaker.ProfilImage(
             "img/profil/unitTest.png", 
@@ -18,6 +18,9 @@ class Test_Image_Maker(unittest.TestCase):
             background=imgBackground+"default"
         )
 
-        self.assertTrue(os.path.isfile(profilImage.ProfilPath))
+        self.assertTrue(os.path.isfile(profilImage.ProfilPath()))
 
-        os.remove(profilImage.ProfilPath)
+        os.remove(profilImage.ProfilPath())
+        
+if __name__ == '__main__':
+    unittest.main()
