@@ -42,7 +42,7 @@ class ProfilImage():
 
         h, w = pic.size
 
-        pic = self.__crop_max_square(pic).resize((w, h), Image.LANCZOS)
+        pic = self.__crop_max_square(pic).resize((w, h), Image.Resampling.LANCZOS)
         pic = self.__mask_circle_transparent(pic, 1)
 
         img.paste(pic, (coords["profilPicture"]['x'],
