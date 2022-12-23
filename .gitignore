@@ -1,6 +1,6 @@
 __pycache__
 .env
 .DS_Store
-img/profile/*
+data/img/profile/*
 .idea/*
 .vscode/
