@@ -12,6 +12,12 @@ class Profile(discord.Cog):
     async def profile(self, ctx):
         await ctx.defer()
 
+        user_id = str(ctx.author.id)
+        guild_id = str(ctx.guild.id)
+        username = ctx.author.name + "#" + ctx.author.discriminator
+        userdisplayname = ctx.author.display_name
+        userprofile = ctx.author.avatar.url
+
         img_profile = "data/img/profile/"
         img_background = "data/img/background/"
 
@@ -19,12 +25,12 @@ class Profile(discord.Cog):
         self.__make_dir(img_background)
 
         pro = ProfilImage(
-            img_profile + "386200134628671492.png",
-            "Ethann8#7747",
-            "https://cdn.discordapp.com/avatars/386200134628671492/a_de9e9a4c0e60276e7252e9b75c821b49.png",
+            img_profile + user_id + ".png",
+            username,
+            userprofile,
             5,
             420,
-            "Ethann",
+            userdisplayname,
             background=img_background + "default"
         )
         await ctx.respond(file=discord.File(pro.ProfilPath()))
