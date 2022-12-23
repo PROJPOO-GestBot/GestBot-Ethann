@@ -12,14 +12,12 @@ class Profile(discord.Cog):
     async def profile(self, ctx):
         await ctx.defer()
 
-        # TODO this folder doesn't exist
         img_profile = "data/img/profile/"
         img_background = "data/img/background/"
 
         self.__make_dir(img_profile)
         self.__make_dir(img_background)
 
-        # TODO Review Remove data from you code. You must using parameters to pass this kind of information.
         pro = ProfilImage(
             img_profile + "386200134628671492.png",
             "Ethann8#7747",
