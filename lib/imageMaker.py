@@ -15,7 +15,20 @@ class ProfilImage():
         'levelBar':{'x': 0,'y': 254}
     }
 
-    def __init__(self, profilPath:str, userName:str, userProfilPicture:str, level:int, xp:int, display_name:str, coords:dict=__coords,badge:dict=[], background:str="", textColor:str="#0000FF", barColor:str="#ADFF2F"):
+    def __init__(self, 
+                 profilPath:str, 
+                 userName:str, 
+                 userProfilPicture:str, 
+                 level:int, 
+                 xp:int, 
+                 display_name:str, 
+                 coords:dict=__coords,
+                 badge:dict=[], 
+                 background:str="", 
+                 textColor:str="#0000FF", 
+                 barColor:str="#ADFF2F"
+        ):
+        
         img = Image.open(background).convert('RGBA').resize((500,281))
 
         _textColor = ImageColor.getcolor(str(textColor), "RGBA")
@@ -94,11 +107,13 @@ class ProfilImage():
     def __new_bar(self, x, y, width, height, progress, bg=(0, 0, 0, 0), fg=(173,255,47,255), fg2=(15,15,15,0)):
         bar = Image.new(mode="RGBA", size=(width+(x*2)*2, height+(y*2)*2))
         draw = ImageDraw.Draw(bar)
+        
         # Draw the background
         draw.rectangle((x+(height/2), y, x+width+(height/2), y+height), fill=fg2, width=10)
         draw.ellipse((x+width, y, x+height+width, y+height), fill=fg2)
         draw.ellipse((x, y, x+height, y+height), fill=fg2)
         width = int(width*progress)
+        
         # Draw the part of the progress bar that is actually filled
         draw.rectangle((x+(height/2), y, x+width+(height/2), y+height), fill=fg, width=10)
         draw.ellipse((x+width, y, x+height+width, y+height), fill=fg)
