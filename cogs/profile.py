@@ -3,7 +3,6 @@ import os
 
 from lib.imageMaker import ProfilImage
 
-
 class Profile(discord.Cog):
     def __init__(self, bot) -> None:
         self._bot = bot
