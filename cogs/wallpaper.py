@@ -10,11 +10,14 @@ class Wallpaper(discord.Cog):
     async def wallpaper(self, ctx, *, option:str, wallpaper:str):
         await ctx.defer()
         
-        match option:
-            case "change":
-                pass
-            case "list":
-                pass
+        if isinstance(ctx.channel, discord.channel.TextChannel):
+            match option:
+                case "change":
+                    pass
+                case "list":
+                    pass
+        else:
+            await ctx.respond("You can only use this command in a server!")
 
 def setup(bot):
     bot.add_cog(Wallpaper(bot))

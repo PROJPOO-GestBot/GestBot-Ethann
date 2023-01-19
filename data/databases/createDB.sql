@@ -72,29 +72,6 @@ CREATE TABLE IF NOT EXISTS `GestBot`.`Profils` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
--- -----------------------------------------------------
--- Table `GestBot`.`Wallpapers_has_Profils`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `GestBot`.`Wallpapers_has_Profils` (
-  `Wallpapers_id` INT NOT NULL,
-  `Profils_id` INT NOT NULL,
-  PRIMARY KEY (`Wallpapers_id`, `Profils_id`),
-  INDEX `fk_Wallpapers_has_Profils_Profils1_idx` (`Profils_id` ASC) VISIBLE,
-  INDEX `fk_Wallpapers_has_Profils_Wallpapers1_idx` (`Wallpapers_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Wallpapers_has_Profils_Wallpapers1`
-    FOREIGN KEY (`Wallpapers_id`)
-    REFERENCES `GestBot`.`Wallpapers` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Wallpapers_has_Profils_Profils1`
-    FOREIGN KEY (`Profils_id`)
-    REFERENCES `GestBot`.`Profils` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
 -- -----------------------------------------------------
 -- Table `GestBot`.`Profils_has_Wallpapers`
 -- -----------------------------------------------------
