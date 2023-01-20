@@ -1,7 +1,7 @@
 import discord
 import os
 
-from lib.imageMaker import ProfilImage
+from libs.imageMaker import ProfilImage
 
 class Profile(discord.Cog):
     def __init__(self, bot) -> None:
@@ -33,7 +33,7 @@ class Profile(discord.Cog):
                 userdisplayname,
                 background=img_background + "default"
             )
-            await ctx.respond(file=discord.File(pro.ProfilPath()))
+            await ctx.respond(file=discord.File(pro.profil_path()))
         else:
             await ctx.respond("You can only use this command in a server!")
 

@@ -84,7 +84,7 @@ class ProfilImage():
 
         self.__profilPath = profilPath
 
-    def ProfilPath(self):
+    def profil_path(self):
         return self.__profilPath
 
     # Private Methods

@@ -1,8 +1,8 @@
 import unittest, os, sys, hashlib
 sys.path.insert(0,'..')
-import GestBot.lib.imageMaker as ImageMaker
+import GestBot.libs.imageMaker as ImageMaker
 
-class Test_ImageMaker(unittest.TestCase):
+class TestImageMaker(unittest.TestCase):
     __imgBackground = "data/img/background/default"
 
     def test_is_there_a_file(self):
