@@ -1,4 +1,5 @@
 import os
+import re 
 from libs.db import Database
 
 from dotenv import load_dotenv
@@ -80,6 +81,74 @@ class Lusers():
         query = self.__select_profiles("Wallpapers.name")
         return self.__db.select(query=query)[0][0]
     
+    def change_wallpaper(self, wallpaper_name):
+        query = ("SELECT Wallpapers.id FROM Wallpapers " +
+                "WHERE Wallpapers.name = '" + wallpaper_name + "';")
+        
+        query_result = self.__db.select(query=query)
+        
+        if len(query_result) < 1:
+            raise Exception("Wallpaper not found")
+        
+        wallpaper_id = query_result[0][0]
+        
+        profils_id = self.__db.select(query=self.__select_profiles("Profils.id"))[0][0]
+        
+        print(wallpaper_id)
+        print(profils_id)
+        
+        if self.__wallpaper_is_posseded(wallpaper_name):
+            query = ("UPDATE Profils " +
+                "SET Wallpapers_id = " + str(wallpaper_id) + " " +
+                "WHERE id = "+ str(profils_id)+";")
+            
+            self.__db.modify(query=query)
+        else:
+            raise Exception("Wallpaper not posseded")
+    
+    def change_bar_color(self, color, bar_color_or_name_color: bool=True):
+        profils_id = self.__db.select(query=self.__select_profiles("Profils.id"))[0][0]
+
+        hex_regex_check=re.findall(r'^#(?:[0-9a-fA-F]{3}){1,2}$|^#(?:[0-9a-fA-F]{3,4}){1,2}$',color)
+
+        final_color = ""
+    
+        color_list = {
+            "blue":"0000FF",
+            "white":"FFFFFF",
+            "black":"000000",
+            "green":"00FF00",
+            "yellow":"E6E600",
+            "pink":"FF00FF",
+            "red":"FF0000",
+            "orange":"FF9900",
+            "purple":"990099",
+            "brown":"D2691E",
+            "grey":"808080"
+        }
+        
+        if hex_regex_check:
+            final_color = hex_regex_check[0].replace("#","")
+        elif color in color_list:
+            final_color = color_list[color]
+        else:
+            raise Exception("Color not found")
+        
+        bar_name_color = ""
+        
+        if bar_color_or_name_color:
+            bar_name_color = "barColor"
+        else:
+            bar_name_color = "nameColor"
+        
+        query = ("UPDATE Profils " +
+            "SET " + bar_name_color + " = '" + final_color + "' " +
+            "WHERE id = "+ str(profils_id)+";")
+        self.__db.modify(query=query)
+            
+        
+        return
+    
     # public methods
     
     # private methods
@@ -92,6 +161,13 @@ class Lusers():
                 "INNER JOIN Server ON Server_has_Profils.Server_id = Server.id " + 
                 "INNER JOIN Wallpapers ON Profils.Wallpapers_id = Wallpapers.id " +
                 "WHERE Server.serverId = " + str(self.__server_id) + " AND Users.userId = "+ str(self.__user_id) +";")
+        
+    def __wallpaper_is_posseded(self, wallpaper_name):
+        for wallpaper in self.get_list_posseded_wallpapers():
+            if wallpaper_name == wallpaper[0]:
+                return True
+        return False
+
         
     # private methods
 
