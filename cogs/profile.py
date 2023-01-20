@@ -2,6 +2,7 @@ import discord
 import os
 
 from libs.imageMaker import ProfilImage
+from libs.Lusers import Lusers
 
 class Profile(discord.Cog):
     def __init__(self, bot) -> None:
@@ -12,8 +13,12 @@ class Profile(discord.Cog):
         await ctx.defer()
 
         if isinstance(ctx.channel, discord.channel.TextChannel):
+            
             user_id = str(ctx.author.id)
             guild_id = str(ctx.guild.id)
+            
+            user = Lusers(user_id, guild_id)
+
             username = ctx.author.name + "#" + ctx.author.discriminator
             userdisplayname = ctx.author.display_name
             userprofile = ctx.author.avatar.url
@@ -28,10 +33,12 @@ class Profile(discord.Cog):
                 img_profile + user_id + ".png",
                 username,
                 userprofile,
-                5,
-                420,
+                user.level(),
+                user.xp(),
                 userdisplayname,
-                background=img_background + "default"
+                background=img_background + user.current_wallpaper(),
+                bar_color="#" + user.bar_color(),
+                name_color="#" + user.name_color()
             )
             await ctx.respond(file=discord.File(pro.profil_path()))
         else:

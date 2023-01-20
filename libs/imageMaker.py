@@ -17,26 +17,26 @@ class ProfilImage():
     }
 
     def __init__(self,
-                 profilPath: str,
-                 userName: str,
-                 userProfilPicture: str,
+                 profil_path: str,
+                 user_name: str,
+                 user_profil_picture: str,
                  level: int,
                  xp: int,
                  display_name: str,
                  coords: dict = __coords,
                  badge: dict = [],
                  background: str = "",
-                 textColor: str = "#0000FF",
-                 barColor: str = "#ADFF2F"
+                 name_color: str = "#0000FF",
+                 bar_color: str = "#ADFF2F"
                  ):
 
         img = Image.open(background).convert('RGBA').resize((500, 281))
 
-        _textColor = ImageColor.getcolor(str(textColor), "RGBA")
-        _barColor = ImageColor.getcolor(str(barColor), "RGBA")
+        _name_color = ImageColor.getcolor(str(name_color), "RGBA")
+        _bar_color = ImageColor.getcolor(str(bar_color), "RGBA")
 
         # image
-        response = requests.get(userProfilPicture)
+        response = requests.get(user_profil_picture)
         pic = Image.open(BytesIO(response.content)).convert(
             'RGBA').resize((128, 128))
 
@@ -53,14 +53,14 @@ class ProfilImage():
 
         # name
         d.multiline_text((coords["name"]['x'], coords["name"]['y']), display_name, font=ImageFont.truetype(
-            "data/font/ancientMedium.ttf", 45), fill=_textColor)
+            "data/font/ancientMedium.ttf", 45), fill=_name_color)
 
-        d.multiline_text((coords["userName"]['x'], coords["userName"]['y']), userName, font=ImageFont.truetype(
-            "data/font/LiberationSans-Regular.ttf", 20), fill=_textColor)
+        d.multiline_text((coords["userName"]['x'], coords["userName"]['y']), user_name, font=ImageFont.truetype(
+            "data/font/LiberationSans-Regular.ttf", 20), fill=_name_color)
 
         # level
         d.multiline_text((coords["level"]['x'], coords["level"]['y']), str(
-            level), font=ImageFont.truetype("data/font/LiberationSans-Regular.ttf", 30), fill=_barColor)
+            level), font=ImageFont.truetype("data/font/LiberationSans-Regular.ttf", 30), fill=_bar_color)
 
         # badge
 
@@ -76,13 +76,13 @@ class ProfilImage():
 
         progress = (xp * 100 / (level * 200))/100
 
-        bar = self.__new_bar(1, 1, 500, 25, progress, fg=_barColor)
+        bar = self.__new_bar(1, 1, 500, 25, progress, fg=_bar_color)
 
         img.paste(bar, (coords['levelBar']['x'], coords['levelBar']['y']), bar)
 
-        img.save(profilPath)
+        img.save(profil_path)
 
-        self.__profilPath = profilPath
+        self.__profilPath = profil_path
 
     def profil_path(self):
         return self.__profilPath
