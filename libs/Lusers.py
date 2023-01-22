@@ -9,6 +9,7 @@ load_dotenv()
 class Lusers():
 
     # public methods
+    
     def __init__(self, user_id, server_id):        
         self.__db = Database(
             os.getenv("SQL_USERNAME"),
@@ -57,14 +58,25 @@ class Lusers():
                             "WHERE id = "+ str(current_id)+";")
 
     def remove_xp(self, number_xp):
-        return
+        raise NotImplementedError
 
-    def add_users(self):
+    def check_user_existing(self, user_id, guild_id):
         query = ("SELECT * FROM gestbot.users " +
-                 "WHERE userId="+ str(self.__user_id) +";")
-        if self.__db.select(query=query) == None:
-            NotADirectoryError
-            #crée profil pour new user
+                 "WHERE userId="+ str(user_id) +";")
+        if self._db.select(query=query) == []:
+            query = ("insert into users (userID) " +
+                     "value("+ str(user_id) +");")
+            self._db.modify(query=query)
+        
+        query = ("SELECT serverId FROM gestbot.server " +
+                "WHERE serverId= "+ str(guild_id) +";")
+        if self._db.select(query=query) == []:
+            query = ("insert into server(serverId)" +
+                     "value("+ str(guild_id)+")")
+            self._db.modify(query=query)
+            query = ("INSERT INTO profils(profilId) " +
+                     "SELECT MAX(id)+1 FROM profils")
+            self._db.modify(query=query)
             
     def get_list_posseded_wallpapers(self):
             query = ("SELECT Wallpapers.name, Wallpapers.level FROM Profils " +
@@ -138,14 +150,10 @@ class Lusers():
         else:
             bar_name_color = "nameColor"
         
-        query = ("UPDATE Profils " +
+        self.__db.modify(query=("UPDATE Profils " +
             "SET " + bar_name_color + " = '" + final_color + "' " +
-            "WHERE id = "+ str(profils_id)+";")
-        self.__db.modify(query=query)
+            "WHERE id = "+ str(profils_id)+";"))
             
-        
-        return
-    
     # public methods
     
     # private methods
