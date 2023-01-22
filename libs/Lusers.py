@@ -94,9 +94,6 @@ class Lusers():
         
         profils_id = self.__db.select(query=self.__select_profiles("Profils.id"))[0][0]
         
-        print(wallpaper_id)
-        print(profils_id)
-        
         if self.__wallpaper_is_posseded(wallpaper_name):
             query = ("UPDATE Profils " +
                 "SET Wallpapers_id = " + str(wallpaper_id) + " " +
