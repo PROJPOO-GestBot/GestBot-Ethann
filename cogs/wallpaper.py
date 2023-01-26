@@ -6,7 +6,7 @@ class Wallpaper(discord.Cog):
         self._bot = bot
 
     @discord.slash_command(name="wallpaper", description="To change/buy wallpaper")
-    @discord.option("option", description="list/change", choices=["change", "list", "Name Color", "Bar Color"])
+    @discord.option("option", description="list/change", choices=["Change", "List", "Name Color", "Bar Color"])
     @discord.option("text", description="Wallpaper specified or name and bar color", required=False)
     async def wallpaper(self, ctx, *, option:str, text:str):
         await ctx.defer()
