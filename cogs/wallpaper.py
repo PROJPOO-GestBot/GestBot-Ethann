@@ -13,30 +13,24 @@ class Wallpaper(discord.Cog):
                 
         if isinstance(ctx.channel, discord.channel.TextChannel):
             user = Lusers(ctx.author.id, ctx.guild.id)
-
-            match option:
-                case "change":
-                    try: 
+            
+            try: 
+                match option:
+                    case "Change":
                         user.change_wallpaper(text)
                         await ctx.respond("Wallpaper changed!")
-                    except Exception as e:
-                        await ctx.respond(str(e))
-                case "list":
-                    await ctx.respond(embed=self.__generate_embeb(user.get_list_posseded_wallpapers()))
-                case "Name Color":
-                    try: 
+                    case "List":
+                        await ctx.respond(embed=self.__generate_embeb(user.get_list_posseded_wallpapers()))
+                    case "Name Color":
                         user.change_bar_color(text, bar_color_or_name_color=False)
                         await ctx.respond("Name color changed!")
-                    except Exception as e:
-                        await ctx.respond(str(e))
-                case "Bar Color":
-                    try: 
-                        user.change_bar_color(text)
-                        await ctx.respond("Bar color changed!")
-                    except Exception as e:
-                        await ctx.respond(str(e))
-                case _:
-                    await ctx.respond("Option not found!")
+                    case "Bar Color":
+                         user.change_bar_color(text)
+                         await ctx.respond("Bar color changed!")
+                    case _:
+                         await ctx.respond("Option not found!")
+            except Exception as e:
+                await ctx.respond(str(e))
                     
         else:
             await ctx.respond("You can only use this command in a server!")
